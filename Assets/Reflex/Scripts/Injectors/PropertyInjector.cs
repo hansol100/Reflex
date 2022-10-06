@@ -15,7 +15,7 @@ namespace Reflex.Injectors
 			}
 			catch (Exception e)
 			{
-				Debug.LogError(e);
+                Debug.LogError($"{instance}:{property.Name} Error : {e}");
 			}
 		}
 

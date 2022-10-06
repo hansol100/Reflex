@@ -6,26 +6,26 @@ using UnityEngine;
 
 namespace Reflex.Injectors
 {
-	internal static class FieldInjector
-	{
-		private static void Inject(FieldInfo field, object instance, Container container)
-		{
-			try
-			{
-				field.SetValue(instance, container.Resolve(field.FieldType));
-			}
-			catch (Exception e)
-			{
-				Debug.LogError(e);
-			}
-		}
+    internal static class FieldInjector
+    {
+        private static void Inject(FieldInfo field, object instance, Container container)
+        {
+            try
+            {
+                field.SetValue(instance, container.Resolve(field.FieldType));
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"{instance}:{field.Name} Error : {e}");
+            }
+        }
 
-		internal static void InjectMany(IEnumerable<FieldInfo> fields, object instance, Container container)
-		{
-			foreach (var field in fields)
-			{
-				Inject(field, instance, container);
-			}
-		}
-	}
+        internal static void InjectMany(IEnumerable<FieldInfo> fields, object instance, Container container)
+        {
+            foreach (var field in fields)
+            {
+                Inject(field, instance, container);
+            }
+        }
+    }
 }
